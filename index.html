@@ -58,6 +58,11 @@ section>h2{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing
 .feat p{max-width:60ch}
 .feat p+p{margin-top:10px}
 .feat .btn{margin-top:18px}
+.demo{margin:4px 0 18px}
+.demo video{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#0e2a20}
+.demo .v-tall{display:none;max-width:320px;margin:0 auto}
+.demo figcaption{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin-top:8px}
+@media (max-width:680px){.demo .v-wide{display:none}.demo .v-tall{display:block}}
 [hidden]{display:none!important}
 .more{list-style:none}
 .more li{padding:14px 0;border-bottom:1px solid var(--line)}
@@ -104,7 +109,7 @@ footer a.mail:hover{color:var(--accent)}
     <p class="lead" data-k="lead"></p>
     <div class="cta">
       <a class="btn primary" id="dl" href="CV_Noah_Cuenca_ES.pdf" download data-k="download"></a>
-      <a class="btn" id="mailbtn" href="mailto:ncuencachacon@gmail.com" data-k="contact"></a>
+      <a class="btn" id="mailbtn" href="mailto:noahworkscuenca@gmail.com" data-k="contact"></a>
     </div>
   </header>
 
@@ -113,6 +118,11 @@ footer a.mail:hover{color:var(--accent)}
       <h2 data-k="h_featured"></h2>
       <div class="feat">
         <h3>Ticksy</h3>
+        <figure class="demo">
+          <video class="v-wide" controls muted playsinline loop preload="none" poster="media/poster-16x9.jpg" data-k-aria="demo_alt"><source src="media/ticksy-demo-16x9.mp4" type="video/mp4"></video>
+          <video class="v-tall" controls muted playsinline loop preload="none" poster="media/poster-9x16.jpg" data-k-aria="demo_alt"><source src="media/ticksy-demo-9x16.mp4" type="video/mp4"></video>
+          <figcaption data-k="demo_note"></figcaption>
+        </figure>
         <p data-k="featured"></p>
         <p data-k="featured2"></p>
         <p data-k="featured3"></p>
@@ -146,7 +156,7 @@ footer a.mail:hover{color:var(--accent)}
   </main>
 
   <footer>
-    <a class="mail" href="mailto:ncuencachacon@gmail.com">ncuencachacon@gmail.com</a>
+    <a class="mail" href="mailto:noahworkscuenca@gmail.com">noahworkscuenca@gmail.com</a>
     <span class="mono" data-k="loc"></span>
   </footer>
 </div>
@@ -164,6 +174,7 @@ const T = {
     role: "Desarrollador de software · Python · Streamlit · Apps y sitios web a la medida",
     lead: "Profesional de operaciones y atención al cliente en transición hacia el desarrollo de software. Construyo y despliego apps y herramientas a la medida que simplifican procesos, y sitios web.",
     download: "Descargar CV (PDF)", contact: "Cuéntame qué necesitas", demo: "Ver demo de Ticksy", code: "Ver código en GitHub",
+    demo_note: "Demo de 24 s con datos de ejemplo.", demo_alt: "Demo en video de Ticksy: foto de la factura, lectura automática y resumen de gastos del mes",
     h_featured: "App destacada", h_more: "Más proyectos", h_exp: "Experiencia", h_skills: "Habilidades", h_edu: "Formación",
     featured: "App para controlar las facturas de proveedores en restaurantes. Nació de un problema real en mi trabajo: se perdían facturas y había dinero que no se reflejaba en los gastos. La llevé del concepto al desarrollo, las pruebas, el despliegue y la iteración.",
     featured2: "Está en uso real y procesa alrededor de 100 facturas al mes. Incluye lectura de facturas con IA, integración con el POS Loyverse y soporte para varios restaurantes.",
@@ -204,6 +215,7 @@ const T = {
     role: "Software Developer · Python · Streamlit · Custom Apps & Websites",
     lead: "Operations and customer-facing professional transitioning into software development. I build and deploy custom apps and tools that simplify processes, and websites.",
     download: "Download CV (PDF)", contact: "Tell me what you need", demo: "View Ticksy demo", code: "View code on GitHub",
+    demo_note: "24-second demo with sample data.", demo_alt: "Ticksy video demo: photo of the invoice, automatic reading and monthly spending summary",
     h_featured: "Featured app", h_more: "More projects", h_exp: "Experience", h_skills: "Skills", h_edu: "Education",
     featured: "App to track supplier invoices in restaurants. It came from a real problem at my job: invoices were getting lost and money wasn't showing up in expenses. I took it from concept through development, testing, deployment, and iteration.",
     featured2: "It's in real use and processes around 100 invoices a month. It includes AI invoice reading, integration with the Loyverse POS, and support for multiple restaurants.",
@@ -248,6 +260,7 @@ function render(lang) {
   document.documentElement.lang = lang;
   document.title = t.title;
   document.querySelectorAll('[data-k]').forEach(n => { n.textContent = t[n.dataset.k]; });
+  document.querySelectorAll('[data-k-aria]').forEach(n => { n.setAttribute('aria-label', t[n.dataset.kAria]); });
   $('#dl').href = t.pdf;
   const demo = $('#demo'); if (TICKSY_URL) { demo.href = TICKSY_URL; demo.hidden = false; } else { demo.hidden = true; }
   const gh = $('#gh'); if (GITHUB_URL) { gh.href = GITHUB_URL; gh.hidden = false; } else { gh.hidden = true; }
