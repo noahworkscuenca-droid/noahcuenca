@@ -1,306 +1,281 @@
 <!doctype html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Noah Cuenca Chacón · Desarrollador de software</title>
-<meta name="description" content="Noah Cuenca Chacón. Desarrollador de software: Python, Streamlit, apps y sitios web a la medida. Costa Rica.">
+<meta name="description" content="Noah Cuenca Chacón. Desarrollador de software: Python, Streamlit, apps y sitios web a la medida. San José, Costa Rica.">
+<link rel="canonical" href="https://noahcuenca.com">
+<meta name="theme-color" content="#FCFCFA">
 <meta property="og:title" content="Noah Cuenca Chacón · Desarrollador de software">
 <meta property="og:description" content="Apps y herramientas a la medida que simplifican procesos, y sitios web.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://noahcuenca.com">
+<meta property="og:image" content="https://noahcuenca.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B6B5F'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='42' fill='%23fff'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F4F1EA; --paper:#FBF9F4; --ink:#14130F; --muted:#6B675C; --line:#D9D4C7; --accent:#3B49FF; --on-accent:#fff;
-  --sans:'Archivo',system-ui,sans-serif; --serif:'Instrument Serif',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --bg:#FCFCFA; --card:#FFFFFF; --ink:#1A1D1C; --muted:#545B58; --line:#DADFDC; --line-soft:#E7EBE8;
+  --chip-border:#C5CCC8; --ctl-border:#7C8581; --accent:#0B6B5F; --on-accent:#FFFFFF;
+  --serif:'Newsreader',Georgia,serif; --sans:'Public Sans',system-ui,sans-serif;
+  color-scheme:light;
 }
-[data-theme="dark"]{
-  --bg:#12110E; --paper:#1A1915; --ink:#F1EEE6; --muted:#9A968A; --line:#2E2C26; --accent:#7C87FF; --on-accent:#0E0E14;
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121513; --card:#191D1B; --ink:#ECEFED; --muted:#A2ABA7; --line:#2B322F; --line-soft:#232926;
+    --chip-border:#3A4440; --ctl-border:#6B7772; --accent:#4FC3B0; --on-accent:#07201C; color-scheme:dark;
+  }
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+:root[data-theme="dark"]{
+  --bg:#121513; --card:#191D1B; --ink:#ECEFED; --muted:#A2ABA7; --line:#2B322F; --line-soft:#232926;
+  --chip-border:#3A4440; --ctl-border:#6B7772; --accent:#4FC3B0; --on-accent:#07201C; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px}
-.bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:12px}
-.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
-.ctrl{display:flex;gap:8px}
-.ctrl button{font:inherit;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;min-height:36px;transition:border-color .2s,background .2s}
-.ctrl button:hover{border-color:var(--ink)}
-.ctrl button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-
-header.hero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,9vw,92px);line-height:.98;letter-spacing:-.02em;margin:14px 0 18px}
-.hero h1 em{color:var(--accent);font-style:italic}
-.hero p.role{font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:var(--muted);margin:-6px 0 20px}
-.hero p.lead{font-size:clamp(17px,2.2vw,20px);max-width:620px;color:var(--ink)}
-.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:500;font-size:15px;text-decoration:none;padding:12px 18px;border-radius:10px;border:1px solid var(--ink);min-height:44px;transition:transform .15s,background .2s}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn:hover{transform:translateY(-2px)}
-.btn:active{transform:translateY(0)}
-
-section{display:grid;grid-template-columns:150px 1fr;gap:12px 32px;padding:40px 0;border-bottom:1px solid var(--line)}
-section>h2{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
-.job{margin-bottom:28px}
-.job:last-child{margin-bottom:0}
-.job h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15}
-.job .meta{font-family:var(--mono);font-size:12px;color:var(--muted);margin:4px 0 10px;letter-spacing:.03em}
-.job ul{list-style:none}
-.job li{position:relative;padding-left:18px;margin-bottom:6px;max-width:62ch}
-.job li::before{content:"";position:absolute;left:0;top:.72em;width:8px;height:1px;background:var(--accent)}
-.feat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px 22px 20px}
-.feat h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;margin-bottom:8px}
-.feat p{max-width:60ch}
-.feat p+p{margin-top:10px}
-.feat .btn{margin-top:18px}
-.demo{margin:4px 0 18px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:56px 32px 72px;display:flex;flex-wrap:wrap;gap:48px 64px;align-items:flex-start}
+aside{flex:1 1 260px;max-width:320px;display:flex;flex-direction:column;gap:24px}
+main{flex:999 1 520px;min-width:0}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(40px,5vw,54px);line-height:1.04;letter-spacing:-.01em;margin:0}
+.role{font-weight:500;color:var(--accent);margin:12px 0 0;line-height:1.35}
+.contact{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.contact a.mail{font-weight:500;word-break:break-word}
+.muted{color:var(--muted)}
+.lab{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap}
+.ctl button{font-family:var(--sans);font-size:14px;font-weight:500;background:transparent;color:var(--ink);border:1px solid var(--ctl-border);border-radius:8px;padding:0 16px;min-height:44px;cursor:pointer;transition:background .15s,color .15s}
+.ctl button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btns{display:flex;flex-direction:column;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:15px;text-decoration:none;padding:0 20px;min-height:48px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);text-align:center}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn[hidden]{display:none}
+section{padding:0 0 40px}
+section+section{padding-top:36px;border-top:1px solid var(--line)}
+h2{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+.profile{font-family:var(--serif);font-size:22px;line-height:1.5;margin:0;max-width:60ch}
+.feat{display:flex;flex-direction:column;gap:28px;border:1px solid var(--line);border-radius:12px;padding:28px;background:var(--card)}
+.feat .txt{display:flex;flex-direction:column;gap:14px;max-width:62ch}
+.feat .txt p{margin:0}
+.feat h3{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;margin:0}
+.feat .head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;border:1px solid var(--chip-border);border-radius:6px;padding:2px 10px;color:var(--ink)}
+.demo{margin:0}
 .demo video{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#0e2a20}
 .demo .v-tall{display:none;max-width:320px;margin:0 auto}
-.demo figcaption{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--muted);margin-top:8px}
-@media (max-width:680px){.demo .v-wide{display:none}.demo .v-tall{display:block}}
-[hidden]{display:none!important}
-.more{list-style:none}
-.more li{padding:14px 0;border-bottom:1px solid var(--line)}
-.more li:first-child{padding-top:0}
-.more li:last-child{border-bottom:0;padding-bottom:0}
-.more h3{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15}
-.more p{max-width:60ch;color:var(--muted)}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.tag{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--muted)}
-.skills dl{display:grid;grid-template-columns:1fr;gap:14px}
-.skills dt{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.skills dd{max-width:64ch}
-.edu li{list-style:none;margin-bottom:6px}
-footer{padding:40px 0 64px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:baseline}
-footer a.mail{font-family:var(--serif);font-size:clamp(26px,5vw,40px);text-decoration:none;border-bottom:1px solid var(--accent)}
-footer a.mail:hover{color:var(--accent)}
-
-@media (max-width:680px){
-  section{grid-template-columns:1fr;gap:16px;padding:32px 0}
-  header.hero{padding:36px 0 36px}
+.demo figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+.shot{min-height:240px;border:1.5px dashed var(--chip-border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:20px;color:var(--muted)}
+.shot img{max-width:100%;height:auto;border-radius:8px}
+.more{margin:20px 0 0;font-size:15px}
+.more b{color:var(--ink);font-weight:600}
+.jobhead{display:flex;justify-content:space-between;align-items:baseline;gap:4px 24px;flex-wrap:wrap}
+.jobhead h3{font-family:var(--serif);font-weight:600;font-size:24px;line-height:1.2;margin:0}
+.when{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.job{margin-bottom:30px}
+.job:last-child{margin-bottom:0}
+ul.b{list-style:none;margin:10px 0 0;padding:0;max-width:66ch}
+ul.b li{position:relative;padding-left:18px;margin-bottom:6px}
+ul.b li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:2px;background:var(--accent)}
+dl{margin:0}
+.sk{display:grid;grid-template-columns:minmax(140px,200px) minmax(0,1fr);gap:4px 24px;padding:12px 0;border-bottom:1px solid var(--line-soft)}
+.sk:last-child{border-bottom:0}
+dt{font-weight:600}
+dd{margin:0}
+@media (max-width:560px){
+  .wrap{padding:36px 20px 56px}
+  .sk{grid-template-columns:minmax(0,1fr)}
+  .feat{padding:22px}
+  .demo .v-wide{display:none}
+  .demo .v-tall{display:block}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.btn:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{
-  .bar,.cta,footer a.mail{display:none}
   body{background:#fff;color:#000}
+  .btns,.ctl,.langbox,.demo,.shot{display:none!important}
+  .wrap{display:block;padding:0}
+  aside{max-width:none}
+  :root{--accent:#000;--muted:#333;--line:#999}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="bar">
-    <span class="mono">noahcuenca.com</span>
-    <div class="ctrl">
-      <button type="button" id="lang-es" aria-pressed="true">ES</button>
-      <button type="button" id="lang-en" aria-pressed="false">EN</button>
-      <button type="button" id="theme" aria-label="Cambiar tema">Tema</button>
+  <aside>
+    <header>
+      <h1>Noah Cuenca Chacón</h1>
+      <p class="role" data-en="Software Developer · Python · Streamlit · Custom Apps &amp; Websites">Desarrollador de software · Python · Streamlit · Apps y sitios web a la medida</p>
+    </header>
+    <ul class="contact">
+      <li><a class="mail" href="mailto:noahworkscuenca@gmail.com">noahworkscuenca@gmail.com</a></li>
+      <li>noahcuenca.com</li>
+      <li class="muted">San José, Costa Rica</li>
+    </ul>
+    <div class="btns">
+      <a class="btn" id="dl" href="CV_Noah_Cuenca_ES.pdf" download data-en="Download CV (PDF)">Descargar CV (PDF)</a>
+      <a class="btn ghost" href="mailto:noahworkscuenca@gmail.com" data-en="Tell me what you need">Cuéntame qué necesitas</a>
     </div>
-  </div>
-
-  <header class="hero">
-    <span class="mono" data-k="where"></span>
-    <h1 id="name">Noah <em>Cuenca</em> Chacón</h1>
-    <p class="role" data-k="role"></p>
-    <p class="lead" data-k="lead"></p>
-    <div class="cta">
-      <a class="btn primary" id="dl" href="CV_Noah_Cuenca_ES.pdf" download data-k="download"></a>
-      <a class="btn" id="mailbtn" href="mailto:noahworkscuenca@gmail.com" data-k="contact"></a>
+    <div class="langbox">
+      <p class="lab" data-en="Page language">Idioma de la página</p>
+      <div class="ctl">
+        <button type="button" id="lang-es" aria-pressed="true">ES</button>
+        <button type="button" id="lang-en" aria-pressed="false">EN</button>
+        <button type="button" id="theme" aria-label="Cambiar tema" data-aria-en="Toggle theme">Tema</button>
+      </div>
     </div>
-  </header>
+  </aside>
 
   <main>
-    <section>
-      <h2 data-k="h_featured"></h2>
+    <section aria-labelledby="h-profile">
+      <h2 id="h-profile" data-en="Professional profile">Perfil profesional</h2>
+      <p class="profile" data-en="Operations and customer-facing professional transitioning into software development, with hands-on experience building and deploying applications with Python, Streamlit and JavaScript. I build custom apps and tools that simplify processes, and websites.">Profesional de operaciones y atención al cliente en transición hacia el desarrollo de software, con experiencia práctica construyendo y desplegando aplicaciones con Python, Streamlit y JavaScript. Desarrollo apps y herramientas a la medida que simplifican procesos, y sitios web.</p>
+    </section>
+
+    <section aria-labelledby="h-feat">
+      <h2 id="h-feat" data-en="Featured project">Proyecto destacado</h2>
       <div class="feat">
-        <h3>Ticksy</h3>
-        <figure class="demo">
-          <video class="v-wide" controls muted playsinline loop preload="none" poster="poster-16x9.jpg" data-k-aria="demo_alt"><source src="ticksy-demo-16x9.mp4" type="video/mp4"></video>
-          <video class="v-tall" controls muted playsinline loop preload="none" poster="poster-9x16.jpg" data-k-aria="demo_alt"><source src="ticksy-demo-9x16.mp4" type="video/mp4"></video>
-          <figcaption data-k="demo_note"></figcaption>
+        <div class="txt">
+          <div class="head">
+            <h3>Ticksy</h3>
+            <span class="chip" data-en="In real use · ≈100 invoices a month">En uso real · ≈100 facturas al mes</span>
+          </div>
+          <p data-en="App to track supplier invoices in restaurants. It came from a real problem at my job: invoices were getting lost and money wasn't showing up in expenses. I took it from concept through development, testing, deployment, and iteration.">App para controlar las facturas de proveedores en restaurantes. Nació de un problema real en mi trabajo: se perdían facturas y había dinero que no se reflejaba en los gastos. La llevé del concepto al desarrollo, las pruebas, el despliegue y la iteración.</p>
+          <p class="muted" data-en="Includes AI invoice reading, integration with the Loyverse POS, and support for multiple restaurants.">Incluye lectura de facturas con IA, integración con el POS Loyverse y soporte para varios restaurantes.</p>
+          <div class="chips"><span class="chip">PWA</span><span class="chip">JavaScript</span><span class="chip">Supabase</span><span class="chip">Loyverse POS</span></div>
+          <div class="btns" id="feat-btns">
+            <a class="btn ghost" id="demo" href="#" target="_blank" rel="noopener" hidden data-en="View Ticksy demo">Ver demo de Ticksy</a>
+            <a class="btn ghost" id="gh" href="#" target="_blank" rel="noopener" hidden data-en="View code on GitHub">Ver código en GitHub</a>
+          </div>
+        </div>
+        <figure class="demo" id="demo-fig">
+          <video class="v-wide" controls muted playsinline loop preload="none" poster="poster-16x9.jpg" aria-label="Demo de Ticksy: panel con facturas de ejemplo" data-aria-en="Ticksy demo: dashboard with sample invoices"><source src="ticksy-demo-16x9.mp4" type="video/mp4"></video>
+          <video class="v-tall" controls muted playsinline loop preload="none" poster="poster-9x16.jpg" aria-label="Demo de Ticksy: panel con facturas de ejemplo" data-aria-en="Ticksy demo: dashboard with sample invoices"><source src="ticksy-demo-9x16.mp4" type="video/mp4"></video>
+          <figcaption data-en="24-second demo with sample data.">Demo de 24 s con datos de ejemplo.</figcaption>
         </figure>
-        <p data-k="featured"></p>
-        <p data-k="featured2"></p>
-        <p data-k="featured3"></p>
-        <div class="tags"><span class="tag">PWA</span><span class="tag">JavaScript</span><span class="tag">Supabase</span><span class="tag" data-k="tag_ocr"></span><span class="tag">Loyverse POS</span></div>
-        <div class="cta" id="feat-cta" style="margin-top:18px">
-          <a class="btn" id="demo" href="#" target="_blank" rel="noopener" hidden data-k="demo"></a>
-          <a class="btn" id="gh" href="#" target="_blank" rel="noopener" hidden data-k="code"></a>
+        <div class="shot" id="shot" hidden>
+          <span style="font-weight:600" data-en="[TICKSY SCREENSHOT]">[CAPTURA DE TICKSY]</span>
+          <span style="font-size:14px;max-width:24ch" data-en="Screen with the invoice list">Pantalla con la lista de facturas</span>
         </div>
       </div>
+      <p class="muted more"><b data-en="More projects:">Más proyectos:</b> <span data-en="Kontea, automatic inventory control app for restaurants · Interactive website for a book (in development).">Kontea, app de control de inventario automático para restaurantes · Sitio web interactivo para un libro (en desarrollo).</span></p>
     </section>
 
-    <section>
-      <h2 data-k="h_more"></h2>
-      <ul class="more" id="more"></ul>
+    <section aria-labelledby="h-exp">
+      <h2 id="h-exp" data-en="Professional experience">Experiencia profesional</h2>
+      <article class="job">
+        <div class="jobhead"><h3 data-en="Founder &amp; Developer, Divende">Fundador y desarrollador, Divende</h3><span class="when" data-en="Independent · Present">Independiente · Presente</span></div>
+        <div class="muted" data-en="Development studio">Estudio de desarrollo</div>
+        <ul class="b">
+          <li data-en="Develop custom apps and tools that simplify business processes, and build websites for small businesses.">Desarrollo apps y herramientas a la medida y creo sitios web para pequeños negocios.</li>
+          <li data-en="Deploy with GitHub staging environments to validate changes before release.">Despliego con entornos de prueba (staging) en GitHub para validar cambios antes de publicarlos.</li>
+          <li data-en="Use AI tools (Claude, Gemini, Google Flow) to speed up code, content, and graphic assets.">Uso herramientas de IA (Claude, Gemini, Google Flow) para acelerar código, contenido y recursos gráficos.</li>
+        </ul>
+      </article>
+      <article class="job">
+        <div class="jobhead"><h3 data-en="Floor Manager, Café Kracovia">Jefe de piso, Café Kracovia</h3><span class="when" data-en="2020 – Present">2020 – Presente</span></div>
+        <ul class="b">
+          <li data-en="Support service decision-making and coordinate 4 servers. Have trained 15+ people.">Apoyo en la toma de decisiones del servicio y coordino a 4 meseros. He capacitado a más de 15 personas.</li>
+          <li data-en="Spotted lost invoices and unrecorded expenses, and built Ticksy to fix it.">Detecté pérdidas de facturas y gastos sin reflejar, y desarrollé Ticksy para resolverlo.</li>
+          <li data-en="Place inventory orders with 4 regular suppliers and stay in constant contact with other suppliers.">Hago los pedidos de inventario con 4 proveedores fijos y mantengo contacto constante con otros proveedores.</li>
+        </ul>
+      </article>
+      <article class="job">
+        <div class="jobhead"><h3 data-en="Judicial Technician, Judicial Branch of Costa Rica">Técnico judicial, Poder Judicial de Costa Rica</h3><span class="when" data-en="2023 · 3 months">2023 · 3 meses</span></div>
+        <ul class="b">
+          <li data-en="Managed official documentation under confidentiality protocols and provided administrative support in judicial processes.">Gestión de documentación oficial bajo protocolos de confidencialidad y soporte administrativo en procesos judiciales.</li>
+        </ul>
+      </article>
     </section>
 
-    <section>
-      <h2 data-k="h_exp"></h2>
-      <div id="jobs"></div>
+    <section aria-labelledby="h-skills">
+      <h2 id="h-skills" data-en="Skills">Habilidades</h2>
+      <dl>
+        <div class="sk"><dt data-en="Development">Desarrollo</dt><dd data-en="Python, Streamlit, JavaScript, Supabase, installable web apps (PWA), GitHub, testing and troubleshooting">Python, Streamlit, JavaScript, Supabase, apps web instalables (PWA), GitHub, pruebas y resolución de problemas</dd></div>
+        <div class="sk"><dt data-en="AI tools">Herramientas de IA</dt><dd data-en="Claude, Gemini, Google Flow, AI document reading (OCR)">Claude, Gemini, Google Flow, lectura de documentos con IA (OCR)</dd></div>
+        <div class="sk"><dt data-en="Support, data &amp; process">Soporte, datos y procesos</dt><dd data-en="Technical support, data management, process improvement">Soporte técnico, gestión de datos, mejora de procesos</dd></div>
+        <div class="sk"><dt data-en="Operations">Operaciones</dt><dd data-en="Inventory control, supplier purchasing, staff training, CRM, conflict resolution">Control de inventarios, compras a proveedores, capacitación de personal, CRM, resolución de conflictos</dd></div>
+        <div class="sk"><dt data-en="Design">Diseño</dt><dd>Photoshop, Illustrator, Canva, CapCut</dd></div>
+      </dl>
     </section>
 
-    <section class="skills">
-      <h2 data-k="h_skills"></h2>
-      <dl id="skills"></dl>
-    </section>
-
-    <section class="edu">
-      <h2 data-k="h_edu"></h2>
-      <ul id="edu"></ul>
+    <section aria-labelledby="h-edu">
+      <h2 id="h-edu" data-en="Education &amp; languages">Formación e idiomas</h2>
+      <ul class="b" style="margin-top:0">
+        <li data-en="Technical Degree in Graphic &amp; Web Design (TEC), in progress">Técnico en Diseño Gráfico y Web (TEC), en curso</li>
+        <li data-en="Bachelor's in Natural Sciences, UNED, 2023 – present">Bachillerato en Ciencias Naturales, UNED, 2023 – actualidad</li>
+        <li data-en="English B1 (intermediate), technical reading and communication in bilingual environments">Inglés B1 (intermedio), lectura técnica y comunicación en entornos bilingües</li>
+      </ul>
     </section>
   </main>
-
-  <footer>
-    <a class="mail" href="mailto:noahworkscuenca@gmail.com">noahworkscuenca@gmail.com</a>
-    <span class="mono" data-k="loc"></span>
-  </footer>
 </div>
 
 <script>
-// Cuando tengas el link de la demo de Ticksy, pégalo aquí entre las comillas y se mostrará el botón.
+// Cuando tengas el enlace de la demo de Ticksy, pégalo entre las comillas y se mostrará el botón.
 const TICKSY_URL = "";
-// Si decides mostrar el código en GitHub, pega aquí el link del repositorio y se mostrará el botón.
+// Si decides publicar el repositorio, pega aquí su enlace y se mostrará el botón de código.
 const GITHUB_URL = "";
+// Si tienes una captura de Ticksy, pon aquí su ruta (ej. "media/captura.png"). Reemplaza al video de demo.
+const TICKSY_SCREENSHOT = "";
 
-const T = {
-  es: {
-    title: "Noah Cuenca Chacón · Desarrollador de software",
-    where: "San José, Costa Rica",
-    role: "Desarrollador de software · Python · Streamlit · Apps y sitios web a la medida",
-    lead: "Profesional de operaciones y atención al cliente en transición hacia el desarrollo de software. Construyo y despliego apps y herramientas a la medida que simplifican procesos, y sitios web.",
-    download: "Descargar CV (PDF)", contact: "Cuéntame qué necesitas", demo: "Ver demo de Ticksy", code: "Ver código en GitHub",
-    demo_note: "Demo de 24 s con datos de ejemplo.", demo_alt: "Demo en video de Ticksy: foto de la factura, lectura automática y resumen de gastos del mes",
-    h_featured: "App destacada", h_more: "Más proyectos", h_exp: "Experiencia", h_skills: "Habilidades", h_edu: "Formación",
-    featured: "App para controlar las facturas de proveedores en restaurantes. Nació de un problema real en mi trabajo: se perdían facturas y había dinero que no se reflejaba en los gastos. La llevé del concepto al desarrollo, las pruebas, el despliegue y la iteración.",
-    featured2: "Está en uso real y procesa alrededor de 100 facturas al mes. Incluye lectura de facturas con IA, integración con el POS Loyverse y soporte para varios restaurantes.",
-    featured3: "Resultado: se evita perder facturas y dinero que no aparece en los gastos, se ahorra tiempo y el control de gastos queda más ordenado.",
-    tag_ocr: "Lectura de facturas con IA",
-    more: [
-      ["Kontea", "App de control de inventario automático para restaurantes."],
-      ["Sitio web interactivo para un libro", "Sitio a la medida con el libro hojeable en pantalla. En desarrollo."]
-    ],
-    loc: "Costa Rica",
-    jobs: [
-      { r: "Fundador y desarrollador", o: "Divende", d: "Estudio de desarrollo · Independiente · Presente", b: [
-        "Desarrollo apps y herramientas a la medida para simplificar procesos de negocio, y creo sitios web para pequeños negocios.",
-        "De Divende salen Ticksy, app de control de facturas, y Kontea, app de control de inventario.",
-        "Despliego con entornos de prueba (staging) en GitHub para validar cambios antes de publicarlos.",
-        "Uso herramientas de IA (Claude, Gemini, Google Flow) para acelerar código, contenido y recursos gráficos." ] },
-      { r: "Jefe de piso", o: "Café Kracovia", d: "2020 – Presente", b: [
-        "Apoyo en la toma de decisiones del servicio y coordino a 4 meseros. He capacitado a más de 15 personas.",
-        "Detecté pérdidas de facturas y gastos sin reflejar en el flujo del local, y desarrollé Ticksy para resolverlo.",
-        "Atiendo unas 40 comandas por servicio, de 2 a 5 bebidas cada una, preparando café y tragos bajo presión.",
-        "Hago los pedidos de inventario con 4 proveedores fijos y mantengo contacto constante con otros proveedores." ] },
-      { r: "Técnico judicial", o: "Poder Judicial de Costa Rica", d: "2023 · 3 meses", b: [
-        "Gestión de documentación oficial bajo protocolos de confidencialidad y soporte administrativo en procesos judiciales." ] }
-    ],
-    skills: [
-      ["Desarrollo de software y aplicaciones", "Python, Streamlit, JavaScript, Supabase, apps web instalables (PWA), GitHub, pruebas y resolución de problemas."],
-      ["Herramientas de IA", "Claude, Gemini, Google Flow, lectura de documentos con IA (OCR)."],
-      ["Soporte técnico, datos y procesos", "Soporte técnico, gestión de datos, mejora de procesos."],
-      ["Operaciones", "Control de inventarios, compras a proveedores, capacitación de personal, CRM, resolución de conflictos."],
-      ["Diseño", "Photoshop, Illustrator, Canva, CapCut."]
-    ],
-    edu: ["Técnico en Diseño Gráfico y Web (TEC), en curso", "Bachillerato en Ciencias Naturales, UNED, 2023 – actualidad", "Inglés B1 (intermedio)"],
-    theme: "Cambiar tema", pdf: "CV_Noah_Cuenca_ES.pdf"
-  },
-  en: {
-    title: "Noah Cuenca Chacón · Software Developer",
-    where: "San José, Costa Rica",
-    role: "Software Developer · Python · Streamlit · Custom Apps & Websites",
-    lead: "Operations and customer-facing professional transitioning into software development. I build and deploy custom apps and tools that simplify processes, and websites.",
-    download: "Download CV (PDF)", contact: "Tell me what you need", demo: "View Ticksy demo", code: "View code on GitHub",
-    demo_note: "24-second demo with sample data.", demo_alt: "Ticksy video demo: photo of the invoice, automatic reading and monthly spending summary",
-    h_featured: "Featured app", h_more: "More projects", h_exp: "Experience", h_skills: "Skills", h_edu: "Education",
-    featured: "App to track supplier invoices in restaurants. It came from a real problem at my job: invoices were getting lost and money wasn't showing up in expenses. I took it from concept through development, testing, deployment, and iteration.",
-    featured2: "It's in real use and processes around 100 invoices a month. It includes AI invoice reading, integration with the Loyverse POS, and support for multiple restaurants.",
-    featured3: "Result: fewer lost invoices and less money missing from expenses, time saved, and more organized expense control.",
-    tag_ocr: "AI invoice reading",
-    more: [
-      ["Kontea", "Automatic inventory control app for restaurants."],
-      ["Interactive website for a book", "Custom site with the book browsable on screen. In development."]
-    ],
-    loc: "Costa Rica",
-    jobs: [
-      { r: "Founder & Developer", o: "Divende", d: "Development studio · Independent · Present", b: [
-        "Develop custom apps and tools that simplify business processes, and build websites for small businesses.",
-        "Divende is where Ticksy, an invoice-tracking app, and Kontea, an inventory control app, come from.",
-        "Deploy with GitHub staging environments to validate changes before release.",
-        "Use AI tools (Claude, Gemini, Google Flow) to speed up code, content, and graphic assets." ] },
-      { r: "Floor Manager", o: "Café Kracovia", d: "2020 – Present", b: [
-        "Support service decision-making and coordinate 4 servers. Have trained 15+ people.",
-        "Spotted lost invoices and unrecorded expenses in the venue's invoice flow, and built Ticksy to fix it.",
-        "Handle about 40 orders per service, 2 to 5 drinks each, preparing coffee and cocktails under pressure.",
-        "Place inventory orders with 4 regular suppliers and stay in constant contact with other suppliers." ] },
-      { r: "Judicial Technician", o: "Judicial Branch of Costa Rica", d: "2023 · 3 months", b: [
-        "Managed official documentation under confidentiality protocols and provided administrative support in judicial processes." ] }
-    ],
-    skills: [
-      ["Software & application development", "Python, Streamlit, JavaScript, Supabase, installable web apps (PWA), GitHub, testing and troubleshooting."],
-      ["AI tools", "Claude, Gemini, Google Flow, AI document reading (OCR)."],
-      ["Technical support, data & process", "Technical support, data management, process improvement."],
-      ["Operations", "Inventory control, supplier purchasing, staff training, CRM, conflict resolution."],
-      ["Design", "Photoshop, Illustrator, Canva, CapCut."]
-    ],
-    edu: ["Technical Degree in Graphic & Web Design (TEC), in progress", "Bachelor's in Natural Sciences, UNED, 2023 – present", "English B1 (intermediate)"],
-    theme: "Toggle theme", pdf: "CV_Noah_Cuenca_EN.pdf"
-  }
-};
-
+const TITLES = { es: "Noah Cuenca Chacón · Desarrollador de software", en: "Noah Cuenca Chacón · Software Developer" };
+const DESCS = { es: "Noah Cuenca Chacón. Desarrollador de software: Python, Streamlit, apps y sitios web a la medida. San José, Costa Rica.", en: "Noah Cuenca Chacón. Software developer: Python, Streamlit, custom apps and websites. San José, Costa Rica." };
+const PDFS = { es: "CV_Noah_Cuenca_ES.pdf", en: "CV_Noah_Cuenca_EN.pdf" };
 const $ = s => document.querySelector(s);
-const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+const $$ = s => Array.from(document.querySelectorAll(s));
+
+// Guarda el español original (ya escrito en el HTML) para poder volver a él.
+$$('[data-en]').forEach(n => { n.dataset.es = n.innerHTML; });
+$$('[data-aria-en]').forEach(n => { n.dataset.ariaEs = n.getAttribute('aria-label'); });
 
 function render(lang) {
-  const t = T[lang];
+  const en = lang === 'en';
   document.documentElement.lang = lang;
-  document.title = t.title;
-  document.querySelectorAll('[data-k]').forEach(n => { n.textContent = t[n.dataset.k]; });
-  document.querySelectorAll('[data-k-aria]').forEach(n => { n.setAttribute('aria-label', t[n.dataset.kAria]); });
-  $('#dl').href = t.pdf;
-  const demo = $('#demo'); if (TICKSY_URL) { demo.href = TICKSY_URL; demo.hidden = false; } else { demo.hidden = true; }
-  const gh = $('#gh'); if (GITHUB_URL) { gh.href = GITHUB_URL; gh.hidden = false; } else { gh.hidden = true; }
-  $('#feat-cta').hidden = !(TICKSY_URL || GITHUB_URL);
-  const more = $('#more'); more.replaceChildren();
-  t.more.forEach(([n, d]) => { const li = el('li'); li.append(el('h3', '', n), el('p', '', d)); more.append(li); });
-  $('#theme').setAttribute('aria-label', t.theme);
-  $('#lang-es').setAttribute('aria-pressed', lang === 'es');
-  $('#lang-en').setAttribute('aria-pressed', lang === 'en');
-
-  const jobs = $('#jobs'); jobs.replaceChildren();
-  t.jobs.forEach(j => {
-    const w = el('div', 'job');
-    w.append(el('h3', '', `${j.r}, ${j.o}`), el('p', 'meta', j.d));
-    const ul = el('ul'); j.b.forEach(b => ul.append(el('li', '', b))); w.append(ul);
-    jobs.append(w);
-  });
-
-  const sk = $('#skills'); sk.replaceChildren();
-  t.skills.forEach(([k, v]) => { const g = el('div'); g.append(el('dt', '', k), el('dd', '', v)); sk.append(g); });
-
-  const ed = $('#edu'); ed.replaceChildren();
-  t.edu.forEach(e => ed.append(el('li', '', e)));
+  document.title = TITLES[lang];
+  const md = document.querySelector('meta[name="description"]'); if (md) md.content = DESCS[lang];
+  $$('[data-en]').forEach(n => { n.innerHTML = en ? n.dataset.en : n.dataset.es; });
+  $$('[data-aria-en]').forEach(n => { n.setAttribute('aria-label', en ? n.dataset.ariaEn : n.dataset.ariaEs); });
+  $('#dl').href = PDFS[lang];
+  $('#lang-es').setAttribute('aria-pressed', String(!en));
+  $('#lang-en').setAttribute('aria-pressed', String(en));
   try { localStorage.setItem('lang', lang); } catch (e) {}
 }
 
-function setTheme(th) {
-  document.documentElement.dataset.theme = th;
-  try { localStorage.setItem('theme', th); } catch (e) {}
+function effectiveTheme() {
+  const t = document.documentElement.dataset.theme;
+  if (t) return t;
+  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  const m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = t === 'dark' ? '#121513' : '#FCFCFA';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+
+// Botones opcionales
+if (TICKSY_URL) { $('#demo').href = TICKSY_URL; $('#demo').hidden = false; }
+if (GITHUB_URL) { $('#gh').href = GITHUB_URL; $('#gh').hidden = false; }
+if (!TICKSY_URL && !GITHUB_URL) $('#feat-btns').hidden = true;
+if (TICKSY_SCREENSHOT) {
+  const img = document.createElement('img');
+  img.src = TICKSY_SCREENSHOT; img.alt = 'Captura de Ticksy con la lista de facturas'; img.loading = 'lazy';
+  $('#shot').replaceChildren(img); $('#shot').hidden = false; $('#demo-fig').hidden = true;
 }
 
 let saved = null, savedTheme = null;
 try { saved = localStorage.getItem('lang'); savedTheme = localStorage.getItem('theme'); } catch (e) {}
-const lang0 = saved || ((navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es');
-setTheme(savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-render(lang0);
+if (savedTheme === 'dark' || savedTheme === 'light') setTheme(savedTheme);
+const lang0 = (saved === 'en' || saved === 'es') ? saved : ((navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es');
+if (lang0 === 'en') render('en');
 
 $('#lang-es').addEventListener('click', () => render('es'));
 $('#lang-en').addEventListener('click', () => render('en'));
-$('#theme').addEventListener('click', () => setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+$('#theme').addEventListener('click', () => setTheme(effectiveTheme() === 'dark' ? 'light' : 'dark'));
 </script>
 </body>
 </html>
